@@ -767,9 +767,6 @@ fn hot_reload_css<T>(
             Ok(mut new_css) => {
                 new_css.sort_by_specificity();
                 window.css = new_css;
-                if !(*should_print_error) {
-                    println!("--- OK: CSS parsed without errors, continuing hot-reload.");
-                }
                 *last_style_reload = Instant::now();
                 // window.events_loop.create_proxy().wakeup().unwrap_or(());
                 *awakened_tasks.get_mut(window_id).ok_or(WindowIndexError)? = true;
@@ -778,7 +775,7 @@ fn hot_reload_css<T>(
             },
             Err(why) => {
                 if *should_print_error {
-                    println!("{}", why);
+                    warn!("{}", why);
                 }
                 *should_print_error = false;
             },

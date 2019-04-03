@@ -173,7 +173,7 @@ impl TableViewState {
         _window_event: &mut CallbackInfo<T>)
     -> UpdateScreen
     {
-        println!("table was clicked");
+        trace!("table was clicked");
         DontRedraw
     }
 }
